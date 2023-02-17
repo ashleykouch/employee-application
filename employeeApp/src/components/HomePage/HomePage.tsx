@@ -10,6 +10,9 @@ const HomePage = () => {
       <div className="home_img">
         <img src={HomeImg} alt="HomeImg" />
       </div>
+      <div className="home_content">
+        <p>Your simple employee management application</p>
+      </div>
     </div>
   );
 };

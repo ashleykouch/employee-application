@@ -20,11 +20,11 @@ const EmployeeList = () => {
 
   return (
     <div className="employees">
-      <h2 className="employees-header">Employees' List</h2>
-      <div className="employees-title">
+      <h2 className="employees_header">Employees' List</h2>
+      <div className="employees_title">
         <p>Please click on "Edit" to find more details of each employee</p>
-        <Link to="/employee-details">
-          <button className="employee-btn">Add Employee</button>
+        <Link to="/employees_details">
+          <button className="employees_btn">Add Employee</button>
         </Link>
       </div>
     </div>
