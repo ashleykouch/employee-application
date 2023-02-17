@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class EmployeeDTO {
     
-// employee personal information
+// Employee personal information
     @NotBlank
     private String firstName;
 
@@ -23,7 +23,7 @@ public class EmployeeDTO {
     @NotBlank
     private String address;
 
-// employee status
+// Employee status
 
     @NotBlank
     private String startDate;
@@ -38,7 +38,7 @@ public class EmployeeDTO {
         this.emailId = emailId;
     }
 
-    // getters and setters
+    // Getters and setters
 
     public String getFirstName() {
         return firstName;
