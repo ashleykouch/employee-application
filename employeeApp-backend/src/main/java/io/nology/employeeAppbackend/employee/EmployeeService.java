@@ -37,6 +37,14 @@ public class EmployeeService {
         return this.repository.findById(id);
     }
 
+    // Update methods
+
+    // public Optional<Employee> update(EmployeeDTO data) {
+    //    repository.save(data);
+        
+    // }
+
+
     // Delete methods
 
     public boolean delete (Long id) {

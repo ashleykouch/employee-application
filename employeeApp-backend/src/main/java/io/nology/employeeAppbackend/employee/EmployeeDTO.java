@@ -8,6 +8,7 @@ public class EmployeeDTO {
     @NotBlank
     private String firstName;
 
+    @NotBlank
     private String middleName;
 
     @NotBlank

@@ -37,13 +37,11 @@ public class EmployeeController {
    @GetMapping("/{id}")
    public ResponseEntity<Employee> getById(@PathVariable Long id) {
     Optional<Employee> employeeId = this.service.getById(id);
-    if (employeeId.isEmpty()) {
+        if (employeeId.isEmpty()) {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-    return new ResponseEntity<>(employeeId.get(), HttpStatus.OK);
+        return new ResponseEntity<>(employeeId.get(), HttpStatus.OK);
     }
-
-    // TODO: post methods
 
     // Post methods
 
@@ -52,6 +50,21 @@ public class EmployeeController {
         Employee createdEmployee = this.service.create(data);
         return new ResponseEntity<Employee>(createdEmployee, HttpStatus.CREATED);
     }
+
+    // TODO: update methods
+
+    // Update methods
+    // @PatchMapping("/{id}")
+    // public ResponseEntity<Employee> update(@RequestBody EmployeeDTO data, @PathVariable Long id) {
+    //     Optional<Employee> existingEmployee = this.service.update(data, id);
+    //     if (existingEmployee.isEmpty()) {
+    //         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    //     }
+    //     return this.service.update(data,id);
+
+    // }
+
+    // Delete methods
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Employee> delete(@PathVariable Long id) {
@@ -65,8 +78,7 @@ public class EmployeeController {
     }
 
 
-    // TODO: update methods
 
-    // TODO: delete methods
+
 }
 
