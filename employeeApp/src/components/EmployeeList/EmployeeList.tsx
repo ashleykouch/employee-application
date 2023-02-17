@@ -23,7 +23,7 @@ const EmployeeList = () => {
       <h2 className="employees_header">Employees' List</h2>
       <div className="employees_title">
         <p>Please click on "Edit" to find more details of each employee</p>
-        <Link to="/employees_details">
+        <Link to="/employee-details">
           <button className="employees_btn">Add Employee</button>
         </Link>
       </div>

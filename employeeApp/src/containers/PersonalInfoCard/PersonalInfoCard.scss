@@ -1,0 +1,27 @@
+.form-container {
+  padding: 40px;
+}
+
+.form-card {
+  &_header {
+    font-weight: 800;
+    margin-left: 35px;
+    font-size: 30px;
+  }
+
+  &_group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_label {
+    margin-bottom: -5px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  &_control {
+    width: 400px;
+    height: 25px;
+  }
+}
