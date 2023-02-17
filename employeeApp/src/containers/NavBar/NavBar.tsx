@@ -1,13 +1,16 @@
-import styles from "./NavBar.module.scss";
 import { Link } from "react-router-dom";
+
+import "./NavBar.scss";
+
+import Logo from "../../assets/app-logo.png";
 
 const NavBar = () => {
   return (
-    <nav className={styles.navbar}>
-      {/* <Link to= "/" className={styles.navbar-logo}>
-
-    </Link> */}
-    </nav>
+    <div className="navbar">
+      <Link to="/" className="navbar_logo">
+        <img src={Logo} alt="logo" />
+      </Link>
+    </div>
   );
 };
 
