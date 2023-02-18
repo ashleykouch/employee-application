@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./EmployeeForm.scss";
 import { Link } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
-import useHistory from "use-history";
 
 const EmployeeForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,9 +13,20 @@ const EmployeeForm = () => {
   const [contractType, setContractType] = useState("");
   const [startDate, setStartDate] = useState("");
   const [finishedDate, setFinishedDate] = useState("");
+  const [workType, setWorkType] = useState("");
   const [hours, setHours] = useState("");
 
-  const history = useHistory();
+  // handling contract type
+  const handleContractTypeChange = (e) => {
+    setContractType(e.target.value);
+  };
+
+  // handling work type
+  const handleWorkTypeChange = (e) => {
+    setWorkType(e.target.value);
+  };
+
+  // const history = useHistory();
 
   const saveEmployee = (e) => {
     e.preventDefault();
@@ -31,17 +41,18 @@ const EmployeeForm = () => {
       contractType,
       startDate,
       finishedDate,
+      workType,
       hours,
     };
 
-    EmployeeService.createEmployee(employee)
-      .then((res) => {
-        console.log(res.data);
-        history.push("/employees");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log(employee);
+    // EmployeeService.createEmployee(employee)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
   return (
     <div>
@@ -137,20 +148,32 @@ const EmployeeForm = () => {
                 <h2 className="form-card_header">Employment Status</h2>
                 <div className="form-card_group">
                   <label className="form-card_label">
-                    What is contract type?{" "}
+                    What is contract type?
                   </label>
-                  {/* <div className="form-card_radio">
+
+                  <div className="form-card_radio">
                     <input
                       type="radio"
-                      placeholder="john.doe@mail.com"
+                      id="permanent"
                       name="contractType"
-                      className="form-card_control"
-                      value={contractType}
-                      onChange={(e) => setContractType(e.target.value)}
+                      value="permanent"
+                      checked={contractType === "permanent"}
+                      onChange={handleContractTypeChange}
                       required
-                    />{" "}
-                    Permanent
-                  </div> */}
+                    />
+                    <label htmlFor="permanent">Permanent</label>
+                  </div>
+                  <div className="form-card_radio">
+                    <input
+                      type="radio"
+                      id="contract"
+                      name="contractType"
+                      value="contract"
+                      checked={contractType === "contract"}
+                      onChange={handleContractTypeChange}
+                    />
+                    <label htmlFor="contract">Contract</label>
+                  </div>
                 </div>
 
                 <div className="form-card_group">
@@ -176,18 +199,35 @@ const EmployeeForm = () => {
                   />
                 </div>
 
+                {/* TODO: radio buttons */}
                 <div className="form-card_group">
                   <label className="form-card_label">
                     Is this on a full time or part time basis?
                   </label>
-                  {/* <input
-                    type="date"
-                    name="finishedDate"
-                    className="form-card_control"
-                    value={finishedDate}
-                    onChange={(e) => setFinishedDate(e.target.value)}
-                    required
-                  /> */}
+
+                  <div className="form-card_radio">
+                    <input
+                      type="radio"
+                      id="fullTime"
+                      name="workType"
+                      value="fullTime"
+                      checked={workType === "fullTime"}
+                      onChange={handleWorkTypeChange}
+                    />
+                    <label htmlFor="fullTime">Full-Time</label>
+                  </div>
+
+                  <div className="form-card_radio">
+                    <input
+                      type="radio"
+                      id="partTime"
+                      name="workType"
+                      value="partTime"
+                      checked={workType === "partTime"}
+                      onChange={handleWorkTypeChange}
+                    />
+                    <label htmlFor="partTime">Part-Time</label>
+                  </div>
                 </div>
 
                 <div className="form-card_group">
@@ -204,12 +244,17 @@ const EmployeeForm = () => {
                 </div>
 
                 {/* submission buttons */}
-                <button className="form_btn" onClick={(e) => saveEmployee(e)}>
-                  Save
-                </button>
-                <Link to="/employees">
-                  <button className="form_btn_cancel">Cancel</button>
-                </Link>
+                <div className="form_btn">
+                  <button
+                    className="form_btn_save"
+                    onClick={(e) => saveEmployee(e)}
+                  >
+                    Save
+                  </button>
+                  <Link to="/employees">
+                    <button className="form_btn_cancel">Cancel</button>
+                  </Link>
+                </div>
               </form>
             </div>
           </div>

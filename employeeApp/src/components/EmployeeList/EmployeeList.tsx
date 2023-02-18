@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 interface Employee {
   id: number;
   firstName: string;
-  lastName: string;
 }
 
 const EmployeeList = () => {
@@ -32,6 +31,13 @@ const EmployeeList = () => {
         <Link to="/employee-details">
           <button className="employees_btn">Add Employee</button>
         </Link>
+      </div>
+      <div>
+        {employees.map((employee: Employee) => (
+          <div key={employee.id}>
+            <h2>{employee.firstName}</h2>
+          </div>
+        ))}
       </div>
     </div>
   );
