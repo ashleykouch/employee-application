@@ -3,6 +3,12 @@ import EmployeeService from "../../services/EmployeeService";
 import "./EmployeeList.scss";
 import { Link } from "react-router-dom";
 
+interface Employee {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
+
 const EmployeeList = () => {
   // create a useState to list employees
   const [employees, setEmployees] = useState([]);
