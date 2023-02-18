@@ -3,15 +3,19 @@ lockfileVersion: 5.4
 specifiers:
   '@types/react': ^18.0.27
   '@types/react-dom': ^18.0.10
+  '@types/react-router': ^5.1.20
+  '@types/react-router-dom': ^5.3.3
   '@vitejs/plugin-react': ^3.1.0
   axios: ^1.3.3
   react: ^18.2.0
   react-datepicker: ^4.10.0
   react-dom: ^18.2.0
   react-dropdown-date: ^2.2.7
+  react-router: ^6.8.1
   react-router-dom: ^6.8.1
   sass: ^1.58.2
   typescript: ^4.9.3
+  use-history: ^1.4.1
   vite: ^4.1.0
 
 dependencies:
@@ -20,12 +24,16 @@ dependencies:
   react-datepicker: 4.10.0_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   react-dropdown-date: 2.2.7_biqbaboplfbrettd7655fr4n2y
+  react-router: 6.8.1_react@18.2.0
   react-router-dom: 6.8.1_biqbaboplfbrettd7655fr4n2y
   sass: 1.58.2
+  use-history: 1.4.1
 
 devDependencies:
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
+  '@types/react-router': 5.1.20
+  '@types/react-router-dom': 5.3.3
   '@vitejs/plugin-react': 3.1.0_vite@4.1.1
   typescript: 4.9.5
   vite: 4.1.1_sass@1.58.2
@@ -504,6 +512,10 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
+  /@types/history/4.7.11:
+    resolution: {integrity: sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==}
+    dev: true
+
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
@@ -511,6 +523,21 @@ packages:
   /@types/react-dom/18.0.11:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
     dependencies:
+      '@types/react': 18.0.28
+    dev: true
+
+  /@types/react-router-dom/5.3.3:
+    resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
+    dependencies:
+      '@types/history': 4.7.11
+      '@types/react': 18.0.28
+      '@types/react-router': 5.1.20
+    dev: true
+
+  /@types/react-router/5.1.20:
+    resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
+    dependencies:
+      '@types/history': 4.7.11
       '@types/react': 18.0.28
     dev: true
 
@@ -1005,11 +1032,28 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react/16.14.0:
+    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      prop-types: 15.8.1
+    dev: false
+
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /reactn/1.0.0_react@16.14.0:
+    resolution: {integrity: sha512-6i0KHxHZsIz3XNOHZe9LErrYMXMrADfAGzgNS3+Hd+BFTocJJb4f8myIZOvXCkrDGW0ALpqPnLjrFFwBUdmimA==}
+    dependencies:
+      use-force-update: 1.0.11_react@16.14.0
+    transitivePeerDependencies:
+      - react
     dev: false
 
   /readdirp/3.6.0:
@@ -1098,6 +1142,21 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
     dev: true
+
+  /use-force-update/1.0.11_react@16.14.0:
+    resolution: {integrity: sha512-h4SICYgTJHon8w9dFIqdqR1Vrzdgl4YaRfRwhmAh01kBGljzTICanyfaFU8C4etuEfRdYpE+04XX2ZrEhOWKXQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 16.14.0
+    dev: false
+
+  /use-history/1.4.1:
+    resolution: {integrity: sha512-uY12M/GI4c2AW/YR/1SLrveP407kLJnsvH42787QeT5PvVB5/TI1SJrPmTreC2dPMjeEywSAeqsXTqRMHl7F9Q==}
+    dependencies:
+      react: 16.14.0
+      reactn: 1.0.0_react@16.14.0
+    dev: false
 
   /vite/4.1.1_sass@1.58.2:
     resolution: {integrity: sha512-LM9WWea8vsxhr782r9ntg+bhSFS06FJgCvvB0+8hf8UWtvaiDagKYWXndjfX6kGl74keHJUcpzrQliDXZlF5yg==}

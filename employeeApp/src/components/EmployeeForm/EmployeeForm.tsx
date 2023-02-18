@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./EmployeeForm.scss";
 import { Link } from "react-router-dom";
+import EmployeeService from "../../services/EmployeeService";
+import useHistory from "use-history";
 
 const EmployeeForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,6 +15,8 @@ const EmployeeForm = () => {
   const [startDate, setStartDate] = useState("");
   const [finishedDate, setFinishedDate] = useState("");
   const [hours, setHours] = useState("");
+
+  const history = useHistory();
 
   const saveEmployee = (e) => {
     e.preventDefault();
@@ -29,7 +33,15 @@ const EmployeeForm = () => {
       finishedDate,
       hours,
     };
-    console.log(employee);
+
+    EmployeeService.createEmployee(employee)
+      .then((res) => {
+        console.log(res.data);
+        history.push("/employees");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div>
