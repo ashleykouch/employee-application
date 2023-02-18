@@ -8,6 +8,7 @@
     font-weight: 800;
     margin-left: 20px;
     font-size: 30px;
+    margin-top: 30px;
   }
 
   &_text {
@@ -29,5 +30,40 @@
   &_control {
     width: 400px;
     height: 25px;
+  }
+}
+
+.form {
+  &_btn {
+    font-size: 15px;
+    width: 125px;
+    height: 30px;
+
+    background-color: #4456c5;
+    color: white;
+    border-radius: 5px;
+    border-color: #4456c5;
+
+    &_cancel {
+      font-size: 15px;
+      width: 125px;
+      height: 30px;
+      border-radius: 5px;
+    }
+
+    &_cancel:hover {
+      background-color: #4456c5;
+      border-color: #4456c5;
+      cursor: pointer;
+      box-shadow: inset 0 0 5px #4456c5;
+      color: white;
+    }
+  }
+
+  &_btn:hover {
+    background-color: #c75b4c;
+    border-color: #c75b4c;
+    cursor: pointer;
+    box-shadow: inset 0 0 5px #4456c5;
   }
 }

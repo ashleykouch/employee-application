@@ -9,6 +9,10 @@ const EmployeeForm = () => {
   const [emailId, setEmailId] = useState("");
   const [mobileNum, setMobileNum] = useState("");
   const [address, setAddress] = useState("");
+  const [contractType, setContractType] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [finishedDate, setFinishedDate] = useState("");
+  const [hours, setHours] = useState("");
 
   const saveEmployee = (e) => {
     e.preventDefault();
@@ -20,6 +24,10 @@ const EmployeeForm = () => {
       emailId,
       mobileNum,
       address,
+      contractType,
+      startDate,
+      finishedDate,
+      hours,
     };
     console.log(employee);
   };
@@ -113,15 +121,82 @@ const EmployeeForm = () => {
                   />
                 </div>
 
+                {/* Employment status */}
+                <h2 className="form-card_header">Employment Status</h2>
+                <div className="form-card_group">
+                  <label className="form-card_label">
+                    What is contract type?{" "}
+                  </label>
+                  {/* <div className="form-card_radio">
+                    <input
+                      type="radio"
+                      placeholder="john.doe@mail.com"
+                      name="contractType"
+                      className="form-card_control"
+                      value={contractType}
+                      onChange={(e) => setContractType(e.target.value)}
+                      required
+                    />{" "}
+                    Permanent
+                  </div> */}
+                </div>
+
+                <div className="form-card_group">
+                  <label className="form-card_label">Start Date </label>
+                  <input
+                    type="date"
+                    name="startDate"
+                    className="form-card_control"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+                </div>
+
+                <div className="form-card_group">
+                  <label className="form-card_label">Finished Date</label>
+                  <input
+                    type="date"
+                    name="finishedDate"
+                    className="form-card_control"
+                    value={finishedDate}
+                    onChange={(e) => setFinishedDate(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-card_group">
+                  <label className="form-card_label">
+                    Is this on a full time or part time basis?
+                  </label>
+                  {/* <input
+                    type="date"
+                    name="finishedDate"
+                    className="form-card_control"
+                    value={finishedDate}
+                    onChange={(e) => setFinishedDate(e.target.value)}
+                    required
+                  /> */}
+                </div>
+
+                <div className="form-card_group">
+                  <label className="form-card_label">Hours per week</label>
+                  <input
+                    type="text"
+                    placeholder="35"
+                    name="hours"
+                    className="form-card_control"
+                    value={hours}
+                    onChange={(e) => setHours(e.target.value)}
+                    required
+                  />
+                </div>
+
                 {/* submission buttons */}
-                <button
-                  className="form_button"
-                  onClick={(e) => saveEmployee(e)}
-                >
+                <button className="form_btn" onClick={(e) => saveEmployee(e)}>
                   Save
                 </button>
                 <Link to="/employees">
-                  <button className="details_btn">Cancel</button>
+                  <button className="form_btn_cancel">Cancel</button>
                 </Link>
               </form>
             </div>
