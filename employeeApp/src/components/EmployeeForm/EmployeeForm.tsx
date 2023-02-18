@@ -17,18 +17,18 @@ const EmployeeForm = () => {
   const [hours, setHours] = useState("");
 
   // handling contract type
-  const handleContractTypeChange = (e) => {
+  const handleContractTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContractType(e.target.value);
   };
 
   // handling work type
-  const handleWorkTypeChange = (e) => {
+  const handleWorkTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWorkType(e.target.value);
   };
 
   // const history = useHistory();
 
-  const saveEmployee = (e) => {
+  const saveEmployee = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const employee = {
@@ -199,7 +199,6 @@ const EmployeeForm = () => {
                   />
                 </div>
 
-                {/* TODO: radio buttons */}
                 <div className="form-card_group">
                   <label className="form-card_label">
                     Is this on a full time or part time basis?
@@ -247,7 +246,7 @@ const EmployeeForm = () => {
                 <div className="form_btn">
                   <button
                     className="form_btn_save"
-                    onClick={(e) => saveEmployee(e)}
+                    onClick={(e) => saveEmployee}
                   >
                     Save
                   </button>
