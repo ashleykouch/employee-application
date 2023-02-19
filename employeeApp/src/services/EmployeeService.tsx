@@ -10,6 +10,10 @@ class EmployeeService {
   createEmployee(employee: any) {
     return axios.post(EMPLOYEE_BASE_REST_API_URL, employee);
   }
+
+  deleteEmployee(employeeId: number) {
+    return axios.delete(EMPLOYEE_BASE_REST_API_URL + "/" + employeeId);
+  }
 }
 
 export default new EmployeeService();
