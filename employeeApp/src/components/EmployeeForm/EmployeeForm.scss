@@ -46,6 +46,8 @@
 .form {
   &_btn {
     margin-top: 20px;
+    display: flex;
+
     &_save {
       font-size: 15px;
       width: 125px;

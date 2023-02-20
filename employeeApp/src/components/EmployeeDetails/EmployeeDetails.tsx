@@ -1,8 +1,6 @@
 import "./EmployeeDetails.scss";
+import { EmployeeForm2 } from "../EmployeeForm/EmployeeForm2";
 import EmployeeForm from "../EmployeeForm/EmployeeForm";
-
-import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const EmployeeDetails = () => {
   return (
@@ -10,6 +8,7 @@ const EmployeeDetails = () => {
       <h2 className="details_header">Employee Details</h2>
       <div className="details_info">
         <EmployeeForm />
+        {/* <EmployeeForm2 /> */}
       </div>
     </div>
   );

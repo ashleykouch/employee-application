@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./EmployeeForm.scss";
 import { Link } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
+import { useNavigate } from "react-router-dom";
 
 const EmployeeForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,20 +16,19 @@ const EmployeeForm = () => {
   const [finishedDate, setFinishedDate] = useState("");
   const [workType, setWorkType] = useState("");
   const [hours, setHours] = useState("");
+  const navigate = useNavigate();
 
   // handling contract type
-  const handleContractTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleContractTypeChange = (e) => {
     setContractType(e.target.value);
   };
 
   // handling work type
-  const handleWorkTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleWorkTypeChange = (e) => {
     setWorkType(e.target.value);
   };
 
-  // const history = useHistory();
-
-  const saveEmployee = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const saveEmployee = (e) => {
     e.preventDefault();
 
     const employee = {
@@ -46,21 +46,26 @@ const EmployeeForm = () => {
     };
 
     console.log(employee);
-    // EmployeeService.createEmployee(employee)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    EmployeeService.createEmployee(employee)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/employees");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   return (
     <div>
       <div className="form-container">
         <div className="form-row">
           <div className="form-card">
+            <Link to="/employees">
+              <h3>Back</h3>
+            </Link>
             <div className="form-card_body">
-              <form>
+              <form onSubmit={saveEmployee}>
                 {/* Personal Information */}
                 <h2 className="form-card_header">Personal Information</h2>
                 <div className="form-card_group">
@@ -243,11 +248,9 @@ const EmployeeForm = () => {
                 </div>
 
                 {/* submission buttons */}
+
                 <div className="form_btn">
-                  <button
-                    className="form_btn_save"
-                    onClick={(e) => saveEmployee}
-                  >
+                  <button type="submit" className="form_btn_save">
                     Save
                   </button>
                   <Link to="/employees">
