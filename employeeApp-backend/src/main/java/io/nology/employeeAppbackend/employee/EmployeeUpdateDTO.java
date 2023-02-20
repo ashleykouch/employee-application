@@ -2,8 +2,6 @@ package io.nology.employeeAppbackend.employee;
 
 // validation imports
 
-import javax.validation.constraints.Pattern;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -14,24 +12,19 @@ public class EmployeeUpdateDTO {
     
 // Employee personal information
     @Nullable
-    @Pattern(regexp = "[a-zA-z]*") 
     String firstName;
 
     @Nullable
-    @Pattern(regexp = "\\s*|[a-zA-Z]*") 
     String middleName;
 
     @Nullable
-    @Pattern(regexp = "\\s*|[a-zA-Z]*")
     String lastName;
 
     // employee contact details
     @Nullable
-    @Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$")
     String emailId;
 
     @Nullable
-    @Pattern(regexp = "[0-9]*{10}")
     String mobileNum;
 
     @Nullable

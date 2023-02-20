@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./EmployeeForm.scss";
 import { Link } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router";
 
-const EmployeeForm = () => {
+interface props {
+  employeeDetails: any;
+}
+
+const EmployeeForm = ({ employeeDetails }: props) => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,18 +22,24 @@ const EmployeeForm = () => {
   const [workType, setWorkType] = useState("");
   const [workHours, setWorkHours] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    setFirstName(employeeDetails?.firstName);
+    console.log(employeeDetails, "details");
+  }, [employeeDetails]);
 
   // handling contract type
-  const handleContractTypeChange = (e) => {
+  const handleContractTypeChange = (e: any) => {
     setContractType(e.target.value);
   };
 
   // handling work type
-  const handleWorkTypeChange = (e) => {
+  const handleWorkTypeChange = (e: any) => {
     setWorkType(e.target.value);
   };
 
-  const saveEmployee = (e) => {
+  const saveorUpdateEmployee = (e: any) => {
     e.preventDefault();
 
     const employee = {
@@ -47,14 +58,47 @@ const EmployeeForm = () => {
 
     console.log(employee);
 
-    EmployeeService.createEmployee(employee)
-      .then((res) => {
-        console.log(res.data);
-        navigate("/employees");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (id) {
+      EmployeeService.updateEmployee(id, employee)
+        .then((res) => {
+          navigate("/employees");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      EmployeeService.createEmployee(employee)
+        .then((res) => {
+          console.log(res.data);
+          navigate("/employees");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    //   useEffect(() => {
+    //     EmployeeService.getByEmployeeId(Number(id))
+    //       .then((res) => {
+    //         console.log(res);
+    //         console.log(employeeDetails);
+    //         setFirstName(employeeDetails.firstName);
+    //         // setMiddleName(res.data.middleName);
+    //         // setLastName(res.data.lastName);
+    //         // setEmailId(res.data.emailId);
+    //         // setMobileNum(res.data.mobileNum);
+    //         // setAddress(res.data.address);
+    //         // setContractType(res.data.contractType);
+    //         // setStartDate(res.data.startDate);
+    //         // setFinishedDate(res.data.finishedDate);
+    //         // setWorkType(res.data.workType);
+    //         // setWorkHours(res.data.workHours);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   }),
+    //     [];
   };
 
   return (
@@ -66,7 +110,7 @@ const EmployeeForm = () => {
               <h3>Back</h3>
             </Link>
             <div className="form-card_body">
-              <form onSubmit={saveEmployee}>
+              <form onSubmit={saveorUpdateEmployee}>
                 {/* Personal Information */}
                 <h2 className="form-card_header">Personal Information</h2>
                 <div className="form-card_group">

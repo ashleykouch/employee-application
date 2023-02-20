@@ -7,6 +7,10 @@ class EmployeeService {
     return axios.get(EMPLOYEE_BASE_REST_API_URL);
   }
 
+  getByEmployeeId(employeeId: Number) {
+    return axios.get(EMPLOYEE_BASE_REST_API_URL + "/" + employeeId);
+  }
+
   createEmployee(employees: {
     firstName: string;
     middleName: string;
@@ -21,6 +25,10 @@ class EmployeeService {
     workHours: string;
   }) {
     return axios.post(EMPLOYEE_BASE_REST_API_URL, employees);
+  }
+
+  updateEmployee(employeeId: any, employees: any) {
+    return axios.put(EMPLOYEE_BASE_REST_API_URL + "/" + employeeId, employees);
   }
 
   deleteEmployee(employeeId: number) {

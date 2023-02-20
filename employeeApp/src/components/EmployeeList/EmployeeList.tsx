@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import EmployeeService from "../../services/EmployeeService";
 import "./EmployeeList.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 interface Employee {
   id: number;
@@ -76,7 +76,9 @@ const EmployeeList = () => {
                 <p>{employee.emailId}</p>
               </div>
               <div className="employees_card_actions">
-                <button className="employees_card_actions_btn">Edit</button>
+                <Link to={`/edit-employee-details/${employee.id}`}>
+                  <button className="employees_card_actions_btn">Edit</button>
+                </Link>
                 <div className="vl"></div>
                 <button
                   className="employees_card_actions_btn"
