@@ -22,9 +22,20 @@ public class EmployeeService {
     // Create employee method
 
     public Employee create(EmployeeDTO data) {
-        Employee newEmployee = new Employee(data.getFirstName(), data.getLastName(), data.getEmailId());
-        this.repository.save(newEmployee);
-        return newEmployee;
+        Employee newEmployee = new Employee();
+        newEmployee.setFirstName(data.getFirstName());
+        newEmployee.setMiddleName(data.getMiddleName());
+        newEmployee.setLastName(data.getLastName());
+        newEmployee.setEmailId(data.getEmailId());
+        newEmployee.setMobileNum(data.getMobileNum());
+        newEmployee.setAddress(data.getAddress());
+        newEmployee.setContractType(data.getContractType());
+        newEmployee.setStartDate(data.getStartDate());
+        newEmployee.setFinishedDate(data.getFinishedDate());
+        newEmployee.setWorkType(data.getWorkType());
+        newEmployee.setWorkHours(data.getWorkHours());
+        
+        return this.repository.save(newEmployee);
     }
 
     // Get methods
@@ -36,13 +47,6 @@ public class EmployeeService {
     public Optional<Employee> getById(Long id) {
         return this.repository.findById(id);
     }
-
-    // Update methods
-
-    // public Optional<Employee> update(EmployeeDTO data) {
-    //    repository.save(data);
-        
-    // }
 
 
     // Delete methods
@@ -56,4 +60,56 @@ public class EmployeeService {
         this.repository.delete(employeeId.get());
         return true;
     }
+
+    // Update methods
+
+    public Employee update(Long id, EmployeeUpdateDTO data, Employee employee) {
+        if(data.firstName != null) {
+            employee.setFirstName(data.firstName.trim());
+        }
+
+        if(data.middleName != null) {
+            employee.setMiddleName(data.middleName.trim());
+        }
+
+        if(data.lastName != null) {
+            employee.setLastName(data.lastName.trim());
+        }
+
+        if(data.emailId != null) {
+            employee.setEmailId(data.emailId);
+        }
+
+        if(data.mobileNum != null) {
+            employee.setMobileNum(data.mobileNum);
+        }
+
+        if(data.address != null) {
+            employee.setAddress(data.address);
+        }
+
+        if(data.contractType != null) {
+            employee.setContractType(data.contractType);
+        }
+
+        if(data.startDate != null) {
+            employee.setStartDate(data.startDate);
+        }
+
+        if(data.finishedDate != null) {
+            employee.setFinishedDate(data.finishedDate);
+        }
+
+        if(data.workType != null) {
+            employee.setWorkType(data.workType);
+        }
+
+        if(data.workHours != null) {
+            employee.setWorkHours(data.workHours);
+        }
+
+        return this.repository.save(employee);
+    }
+
+   
 }

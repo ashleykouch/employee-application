@@ -37,11 +37,20 @@ public class Employee {
 
 // Employee status
 
+    @Column (name = "contract_type")
+    private String contractType;
+
     @Column (name = "start_date")
     private String startDate;
 
     @Column (name = "finished_date")
     private String finishedDate; 
+
+    @Column (name = "work_type")
+    private String workType;
+
+    @Column (name = "work_hours")
+    private String workHours;
 
 
     public Employee() {
@@ -71,6 +80,14 @@ public class Employee {
         this.firstName = firstName;
     }
 
+     public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
     public String getLastName() {
         return lastName;
     }
@@ -85,6 +102,62 @@ public class Employee {
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    public String getMobileNum() {
+        return mobileNum;
+    }
+
+    public void setMobileNum(String mobileNum) {
+        this.mobileNum = mobileNum;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(String contractType) {
+        this.contractType = contractType;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getFinishedDate() {
+        return finishedDate;
+    }
+
+    public void setFinishedDate(String finishedDate) {
+        this.finishedDate = finishedDate;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
+    public String getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(String workHours) {
+        this.workHours = workHours;
     }
 };
 
