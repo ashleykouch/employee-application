@@ -18,7 +18,7 @@ class EmployeeService {
     startDate: string;
     finishedDate: string;
     workType: string;
-    hours: string;
+    workHours: string;
   }) {
     return axios.post(EMPLOYEE_BASE_REST_API_URL, employees);
   }

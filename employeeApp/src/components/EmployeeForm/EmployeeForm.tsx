@@ -15,7 +15,7 @@ const EmployeeForm = () => {
   const [startDate, setStartDate] = useState("");
   const [finishedDate, setFinishedDate] = useState("");
   const [workType, setWorkType] = useState("");
-  const [hours, setHours] = useState("");
+  const [workHours, setWorkHours] = useState("");
   const navigate = useNavigate();
 
   // handling contract type
@@ -42,10 +42,11 @@ const EmployeeForm = () => {
       startDate,
       finishedDate,
       workType,
-      hours,
+      workHours,
     };
 
     console.log(employee);
+
     EmployeeService.createEmployee(employee)
       .then((res) => {
         console.log(res.data);
@@ -239,10 +240,10 @@ const EmployeeForm = () => {
                   <input
                     type="text"
                     placeholder="35"
-                    name="hours"
+                    name="workHours"
                     className="form-card_control"
-                    value={hours}
-                    onChange={(e) => setHours(e.target.value)}
+                    value={workHours}
+                    onChange={(e) => setWorkHours(e.target.value)}
                     required
                   />
                 </div>
