@@ -26,6 +26,16 @@ const EmployeeForm = ({ employeeDetails }: props) => {
 
   useEffect(() => {
     setFirstName(employeeDetails?.firstName);
+    setMiddleName(employeeDetails?.middleName);
+    setLastName(employeeDetails?.lastName);
+    setEmailId(employeeDetails?.emailId);
+    setMobileNum(employeeDetails?.mobileNum);
+    setAddress(employeeDetails?.address);
+    setContractType(employeeDetails?.contractType);
+    setStartDate(employeeDetails?.startDate);
+    setFinishedDate(employeeDetails?.finishedDate);
+    setWorkType(employeeDetails?.workType);
+    setWorkHours(employeeDetails?.workHours);
     console.log(employeeDetails, "details");
   }, [employeeDetails]);
 
@@ -39,7 +49,7 @@ const EmployeeForm = ({ employeeDetails }: props) => {
     setWorkType(e.target.value);
   };
 
-  const saveorUpdateEmployee = (e: any) => {
+  const saveOrUpdateEmployee = (e: any) => {
     e.preventDefault();
 
     const employee = {
@@ -61,6 +71,7 @@ const EmployeeForm = ({ employeeDetails }: props) => {
     if (id) {
       EmployeeService.updateEmployee(id, employee)
         .then((res) => {
+          console.log(res.data);
           navigate("/employees");
         })
         .catch((err) => {
@@ -110,7 +121,7 @@ const EmployeeForm = ({ employeeDetails }: props) => {
               <h3>Back</h3>
             </Link>
             <div className="form-card_body">
-              <form onSubmit={saveorUpdateEmployee}>
+              <form onSubmit={saveOrUpdateEmployee}>
                 {/* Personal Information */}
                 <h2 className="form-card_header">Personal Information</h2>
                 <div className="form-card_group">

@@ -1,5 +1,4 @@
 import "./EmployeeDetails.scss";
-import { EmployeeForm2 } from "../EmployeeForm/EmployeeForm2";
 import EmployeeForm from "../EmployeeForm/EmployeeForm";
 import { useEffect, useState } from "react";
 import EmployeeService from "../../services/EmployeeService";

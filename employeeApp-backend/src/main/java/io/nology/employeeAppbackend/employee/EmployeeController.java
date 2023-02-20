@@ -95,8 +95,9 @@ public class EmployeeController {
 
     // Update Methods
 
+    @CrossOrigin
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> update(@PathVariable Long id, @RequestBody EmployeeUpdateDTO data) {
+    public ResponseEntity<Employee> update(@PathVariable Long id,       @RequestBody EmployeeUpdateDTO data) {
         Optional<Employee> optionalEmployee = this.service.getById(id);
         if (optionalEmployee.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee found with id: " + id);
