@@ -5,11 +5,11 @@ import EmployeeService from "../../services/EmployeeService";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 
-interface props {
+interface Props {
   employeeDetails: any;
 }
 
-const EmployeeForm = ({ employeeDetails }: props) => {
+const EmployeeForm = ({ employeeDetails }: Props) => {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
