@@ -1,14 +1,16 @@
 package io.nology.employeeAppbackend.employee;
 
+// Java util imports
 import java.util.List;
 import java.util.Optional;
 
+// Java transaction imports
 import javax.transaction.Transactional;
 
+// Java framework imports
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
 
 
 @Service

@@ -87,29 +87,6 @@ const EmployeeForm = ({ employeeDetails }: Props) => {
           console.log(err);
         });
     }
-
-    //   useEffect(() => {
-    //     EmployeeService.getByEmployeeId(Number(id))
-    //       .then((res) => {
-    //         console.log(res);
-    //         console.log(employeeDetails);
-    //         setFirstName(employeeDetails.firstName);
-    //         // setMiddleName(res.data.middleName);
-    //         // setLastName(res.data.lastName);
-    //         // setEmailId(res.data.emailId);
-    //         // setMobileNum(res.data.mobileNum);
-    //         // setAddress(res.data.address);
-    //         // setContractType(res.data.contractType);
-    //         // setStartDate(res.data.startDate);
-    //         // setFinishedDate(res.data.finishedDate);
-    //         // setWorkType(res.data.workType);
-    //         // setWorkHours(res.data.workHours);
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   }),
-    //     [];
   };
 
   return (
