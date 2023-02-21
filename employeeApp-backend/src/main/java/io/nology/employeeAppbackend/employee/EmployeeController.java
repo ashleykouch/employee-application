@@ -53,13 +53,18 @@ public class EmployeeController {
    @CrossOrigin
    @GetMapping("/{id}")
    public ResponseEntity<Employee> getById(@PathVariable Long id) {
+    try {
     Optional<Employee> employeeId = this.service.getById(id);
-        if (employeeId.isEmpty()) {
+    if (employeeId.isEmpty()) {
         user.error("Employee " + id + " was not found"); 
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         user.info("Employee " + id + " found");
-        return new ResponseEntity<>(employeeId.get(), HttpStatus.OK);
+            return new ResponseEntity<>(employeeId.get(), HttpStatus.OK);
+    } catch (Exception e) {
+        user.error("Something went wrong doing something");
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Post methods
