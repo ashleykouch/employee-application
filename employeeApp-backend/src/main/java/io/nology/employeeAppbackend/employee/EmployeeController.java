@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
+// Java validation imports
 import javax.validation.Valid;
 
 @RestController
@@ -31,8 +32,7 @@ public class EmployeeController {
     
     Logger user = LoggerFactory.getLogger(EmployeeController.class);
 
-// Dependency injection pattern - CRUD methods
-
+    // Dependency injection pattern - CRUD methods
     @Autowired
     private EmployeeService service;
 
@@ -41,10 +41,10 @@ public class EmployeeController {
     @GetMapping
 
     public ResponseEntity<List<Employee>> getAll() {
-    List<Employee> allEmployees = this.service.getAll();
-    user.info("Employees successfully found");
-    return new ResponseEntity<>(allEmployees, HttpStatus.OK);
-   }
+     List<Employee> allEmployees = this.service.getAll();
+        user.info("Employees successfully found");
+        return new ResponseEntity<>(allEmployees, HttpStatus.OK);
+    }
 
    @CrossOrigin
    @GetMapping("/{id}")
@@ -59,15 +59,14 @@ public class EmployeeController {
     }
 
     // Post methods
-
     @CrossOrigin
     @PostMapping
     public ResponseEntity<Employee> create(@Valid @RequestBody EmployeeDTO data) {
         Employee createdEmployee = this.service.create(data);
         return new ResponseEntity<Employee>(createdEmployee, HttpStatus.CREATED);
     }
-    // Delete methods
 
+    // Delete methods
     @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Employee> delete(@PathVariable Long id) {
@@ -80,21 +79,7 @@ public class EmployeeController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-     // TODO: update methods
-
-    // Update methods
-    // @PatchMapping("/{id}")
-    // public ResponseEntity<Employee> update(@RequestBody EmployeeDTO data, @PathVariable Long id) {
-    //     Optional<Employee> existingEmployee = this.service.update(data, id);
-    //     if (existingEmployee.isEmpty()) {
-    //         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    //     }
-    //     return this.service.update(data,id);
-
-    // }
-
     // Update Methods
-
     @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Employee> update(@PathVariable Long id,       @RequestBody EmployeeUpdateDTO data) {
@@ -106,8 +91,6 @@ public class EmployeeController {
 
         Employee updatedEmployee = this.service.update(id, data, employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
-
     }
-
 }
 
