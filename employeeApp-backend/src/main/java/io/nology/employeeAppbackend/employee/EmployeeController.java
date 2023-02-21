@@ -62,7 +62,7 @@ public class EmployeeController {
         user.info("Employee " + id + " found");
             return new ResponseEntity<>(employeeId.get(), HttpStatus.OK);
     } catch (Exception e) {
-        user.error("Something went wrong doing something");
+        user.error("Something went wrong");
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -84,13 +84,18 @@ public class EmployeeController {
     @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Employee> delete(@PathVariable Long id) {
+        try {
         boolean isDeleted = this.service.delete(id);
-
         if(isDeleted) {
+            user.error("No employee existed for deletion");
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
-
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            user.info("Employee successfully deleted");
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        } catch (Exception e) {
+            user.error("Something went wrong");
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // Update Methods
