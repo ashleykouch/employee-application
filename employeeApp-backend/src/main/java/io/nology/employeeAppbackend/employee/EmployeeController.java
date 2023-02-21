@@ -72,6 +72,11 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<Employee> create(@Valid @RequestBody EmployeeDTO data) {
         Employee createdEmployee = this.service.create(data);
+        if(Integer.parseInt(data.getStartDate()) < Integer.parseInt(data.getFinishedDate())) {
+            user.error("Start date must be before Finished Date");
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        } 
+        user.info("Employee successfully created");
         return new ResponseEntity<Employee>(createdEmployee, HttpStatus.CREATED);
     }
 
