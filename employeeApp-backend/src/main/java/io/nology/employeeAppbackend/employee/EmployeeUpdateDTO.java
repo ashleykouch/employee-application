@@ -1,7 +1,6 @@
 package io.nology.employeeAppbackend.employee;
 
 // validation imports
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -10,7 +9,7 @@ import org.springframework.lang.Nullable;
 
 public class EmployeeUpdateDTO {
     
-// Employee personal information
+    // Employee personal information
     @Nullable
     String firstName;
 
@@ -30,7 +29,7 @@ public class EmployeeUpdateDTO {
     @Nullable
     String address;
 
-// Employee status
+    // Employee status
 
     @Nullable
     String contractType;
@@ -80,7 +79,6 @@ public class EmployeeUpdateDTO {
     }
 
     // Getters and setters
-
     public String getFirstName() {
         return firstName;
     }
