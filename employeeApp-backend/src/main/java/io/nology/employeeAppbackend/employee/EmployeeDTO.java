@@ -11,7 +11,7 @@ import org.springframework.lang.Nullable;
 
 public class EmployeeDTO {
     
-// Employee personal information
+    // Employee personal information
     @NotBlank
     private String firstName;
 
@@ -21,7 +21,7 @@ public class EmployeeDTO {
     @NotBlank
     private String lastName;
 
-    // employee contact details
+    // Employee contact details
     @NotBlank
     private String emailId;
 
@@ -31,8 +31,7 @@ public class EmployeeDTO {
     @NotBlank
     private String address;
 
-// Employee status
-
+    // Employee status
     @NotBlank
     private String contractType;
 
@@ -169,7 +168,5 @@ public class EmployeeDTO {
     public void setWorkHours(String workHours) {
         this.workHours = workHours;
     }
-
-
 };
 
