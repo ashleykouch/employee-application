@@ -42,6 +42,10 @@ public class EmployeeController {
 
     public ResponseEntity<List<Employee>> getAll() {
      List<Employee> allEmployees = this.service.getAll();
+     if(allEmployees.isEmpty()) {
+        user.error("No employees found, please add Employees as required");
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+     } 
         user.info("Employees successfully found");
         return new ResponseEntity<>(allEmployees, HttpStatus.OK);
     }
