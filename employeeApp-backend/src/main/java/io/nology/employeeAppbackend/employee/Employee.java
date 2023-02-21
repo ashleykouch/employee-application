@@ -1,5 +1,6 @@
 package io.nology.employeeAppbackend.employee;
 
+// Java persistence imports
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "employees")
 public class Employee {
 
-// Employee personal information
+    // Employee personal information
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,7 +26,7 @@ public class Employee {
      @Column(name = "last_name")
     private String lastName;
 
-// Employee contact details
+    // Employee contact details
     @Column (name = "email_id")
     private String emailId;
 
@@ -35,7 +36,7 @@ public class Employee {
     @Column (name = "address")
     private String address;
 
-// Employee status
+    // Employee status
 
     @Column (name = "contract_type")
     private String contractType;
