@@ -2,7 +2,9 @@
 
 ## Demo & Snippets
 
-(to be added once finalised)
+![Alt Text](./project_assets/homepage.png)
+![Alt Text](./project_assets/employee-list.png)
+![Alt Text](./project_assets/employee-details.png)
 
 ---
 
@@ -65,9 +67,7 @@ The homepage will include a button that leads users to the "Add Employee" page, 
 Some reasons as to why the above design goals were implemented include:
 
 1. The use of a layered architecture with Entity, DTO, Controller, Repository, and Service is a common and widely accepted approach to building robust and scalable backends. By separating concerns and responsibilities, each layer can focus on its specific tasks, which makes the application easier to maintain, test, and evolve over time.
-
 2. The use of a form on the front-end for adding new employees allows for a more user-friendly and intuitive way of collecting employee information. By presenting a clear and structured form, users can easily input their data without having to know the specific details of how the data will be stored and processed on the backend.
-
 3. The inclusion of a button on the homepage that leads to the "Add Employee" page and a "Delete" button for deleting employees from the database provides an intuitive and accessible user interface. By making these actions easy to find and use, users can efficiently manage the list of employees and maintain the integrity of the database.
 
 ---
@@ -89,13 +89,9 @@ Lastly, a dedicated page has been added to enable users to edit the details of c
 ## Future Goals
 
 1. User Authentication and Authorization: To ensure the security of the application and the privacy of employee information, adding user authentication and authorization would be beneficial.
-
 2. User Interface Design: While React is a popular frontend library, a well-designed user interface is crucial for the success of the application.
-
 3. Data Validation: Adding data validation to the application would ensure that the data being input is in the correct format and adheres to certain rules. This would prevent errors and help maintain data integrity.
-
 4. Documentation: Providing thorough documentation for both the API and the frontend would make it easier for developers to understand the application and how to use it.
-
 5. Further Testing: To have a robust testing strategy in place ot handle edge cases and ensure that the application is stable.
 
 ---
