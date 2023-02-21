@@ -89,6 +89,8 @@ const EmployeeForm = ({ employeeDetails }: Props) => {
     }
   };
 
+  // handle form errors
+
   return (
     <div>
       <div className="form-container">
@@ -164,6 +166,7 @@ const EmployeeForm = ({ employeeDetails }: Props) => {
                     className="form-card_control"
                     value={mobileNum}
                     onChange={(e) => setMobileNum(e.target.value)}
+                    required
                   />
                 </div>
 
