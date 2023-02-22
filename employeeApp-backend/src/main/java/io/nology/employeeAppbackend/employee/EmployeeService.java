@@ -27,6 +27,7 @@ public class EmployeeService {
 
     public Employee create(EmployeeDTO data) {
 
+
         Employee newEmployee = new Employee();
         newEmployee.setFirstName(data.getFirstName());
         newEmployee.setMiddleName(data.getMiddleName());
@@ -69,52 +70,23 @@ public class EmployeeService {
     // Update methods
 
     public Employee update(Long id, EmployeeUpdateDTO data, Employee employee) {
-        if(data.firstName != null) {
+        
             employee.setFirstName(data.firstName.trim());
-        }
 
-        if(data.middleName != null) {
-            employee.setMiddleName(data.middleName.trim());
-        }
-
-        if(data.lastName != null) {
+            if(data.middleName != null) {
+                employee.setMiddleName(data.middleName.trim());
+            }
+            
             employee.setLastName(data.lastName.trim());
-        }
-
-        if(data.emailId != null) {
             employee.setEmailId(data.emailId);
-        }
-
-        if(data.mobileNum != null) {
             employee.setMobileNum(data.mobileNum);
-        }
-
-        if(data.address != null) {
             employee.setAddress(data.address);
-        }
-
-        if(data.contractType != null) {
             employee.setContractType(data.contractType);
-        }
-
-        if(data.startDate != null) {
             employee.setStartDate(data.startDate);
-        }
-
-        if(data.finishedDate != null) {
             employee.setFinishedDate(data.finishedDate);
-        }
-
-        if(data.workType != null) {
             employee.setWorkType(data.workType);
-        }
-
-        if(data.workHours != null) {
             employee.setWorkHours(data.workHours);
-        }
 
         return this.repository.save(employee);
     }
-
-   
 }

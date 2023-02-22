@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 // Java util imports
 import java.util.List;
 import java.util.Optional;
@@ -67,13 +68,26 @@ public class EmployeeController {
         }
     }
 
-    // Post methods
+       // Post methods
     @CrossOrigin
     @PostMapping
     public ResponseEntity<Employee> create(@Valid @RequestBody EmployeeDTO data) {
-        Employee createdEmployee = this.service.create(data);
-        return new ResponseEntity<Employee>(createdEmployee, HttpStatus.CREATED);
+        try {
+            LocalDate startDate = LocalDate.parse(data.getStartDate());
+            LocalDate finishedDate = LocalDate.parse(data.getFinishedDate());
+
+            if(finishedDate.isBefore(startDate)) {
+                user.error("Finished data cannot be before start date");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+              Employee createdEmployee = this.service.create(data);
+              return new ResponseEntity<>(createdEmployee,HttpStatus.CREATED);
+        } catch (Exception e) {
+            user.error("Employee could not be added", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     // Delete methods
     @CrossOrigin
@@ -97,14 +111,29 @@ public class EmployeeController {
     @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Employee> update(@PathVariable Long id,       @RequestBody EmployeeUpdateDTO data) {
+        try {
         Optional<Employee> optionalEmployee = this.service.getById(id);
         if (optionalEmployee.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No employee found with id: " + id);
         }
+
+        LocalDate startDate = LocalDate.parse(data.getStartDate());
+            LocalDate finishedDate = LocalDate.parse(data.getFinishedDate());
+
+        if(finishedDate.isBefore(startDate)) {
+            user.error("Finished data cannot be before start date");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        
         Employee employee = optionalEmployee.get();
 
         Employee updatedEmployee = this.service.update(id, data, employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+        } catch (Exception e) {
+            user.error("Employee could not be added", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+       
     }
 }
 

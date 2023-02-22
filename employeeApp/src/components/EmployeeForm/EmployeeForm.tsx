@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./EmployeeForm.scss";
 import { Link } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   addressRegex,
   emailRegex,
@@ -278,9 +278,6 @@ const EmployeeForm = () => {
                   <input
                     {...register("workHours", {
                       required: true,
-                      min: 8,
-                      max: 45,
-                      pattern: numberRegex,
                     })}
                   />
                 </div>
