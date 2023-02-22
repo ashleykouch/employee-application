@@ -15,7 +15,6 @@
   &_text {
     font-size: 12px;
     color: grey;
-    margin-bottom: -5px;
   }
 
   &_group {
@@ -40,6 +39,11 @@
 
   &_radio {
     margin-top: 10px;
+  }
+
+  &_errors {
+    color: red;
+    font-size: 12px;
   }
 }
 

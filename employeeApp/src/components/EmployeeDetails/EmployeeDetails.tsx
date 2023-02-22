@@ -23,7 +23,7 @@ const EmployeeDetails = () => {
     <div className="details">
       <h2 className="details_header">Employee Details</h2>
       <div className="details_info">
-        <EmployeeForm employeeDetails={employeeDetails} />
+        <EmployeeForm />
         {/* <EmployeeForm2 /> */}
       </div>
     </div>

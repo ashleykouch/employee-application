@@ -7,8 +7,11 @@ class EmployeeService {
     return axios.get(EMPLOYEE_BASE_REST_API_URL);
   }
 
-  getByEmployeeId(employeeId: Number) {
-    return axios.get(EMPLOYEE_BASE_REST_API_URL + "/" + employeeId);
+  async getByEmployeeId(employeeId: Number) {
+    const response = await axios.get(
+      EMPLOYEE_BASE_REST_API_URL + "/" + employeeId
+    );
+    return response.data;
   }
 
   createEmployee(employees: {

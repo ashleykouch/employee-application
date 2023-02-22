@@ -4,92 +4,95 @@ import { Link } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
+import { useForm, SubmitHandler } from "react-hook-form";
+import {
+  addressRegex,
+  emailRegex,
+  nameRegex,
+  numberRegex,
+} from "../commonRegex/commonRegex";
 
-interface Props {
-  employeeDetails: any;
+enum ContractTypeEnum {
+  Permanent = "permanent",
+  Contract = "contract",
 }
 
-const EmployeeForm = ({ employeeDetails }: Props) => {
-  const [firstName, setFirstName] = useState("");
-  const [middleName, setMiddleName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [emailId, setEmailId] = useState("");
-  const [mobileNum, setMobileNum] = useState("");
-  const [address, setAddress] = useState("");
-  const [contractType, setContractType] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [finishedDate, setFinishedDate] = useState("");
-  const [workType, setWorkType] = useState("");
-  const [workHours, setWorkHours] = useState("");
+enum WorkTypeEnum {
+  PartTime = "part time",
+  FullTime = "full time",
+}
+
+interface Employee {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  emailId: string;
+  mobileNum: string;
+  address: string;
+  contractType: ContractTypeEnum;
+  startDate: string;
+  finishedDate: string;
+  workType: WorkTypeEnum;
+  workHours: string;
+}
+
+const EmployeeForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
-    setFirstName(employeeDetails?.firstName);
-    setMiddleName(employeeDetails?.middleName);
-    setLastName(employeeDetails?.lastName);
-    setEmailId(employeeDetails?.emailId);
-    setMobileNum(employeeDetails?.mobileNum);
-    setAddress(employeeDetails?.address);
-    setContractType(employeeDetails?.contractType);
-    setStartDate(employeeDetails?.startDate);
-    setFinishedDate(employeeDetails?.finishedDate);
-    setWorkType(employeeDetails?.workType);
-    setWorkHours(employeeDetails?.workHours);
-    console.log(employeeDetails, "details");
-  }, [employeeDetails]);
+  // useForm state
+  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Employee>({
+    defaultValues: async () =>
+      await EmployeeService.getByEmployeeId(Number(id)),
+  });
+  console.log(
+    EmployeeService.getByEmployeeId(38).then((res) => console.log(res))
+  );
 
-  // handling contract type
-  const handleContractTypeChange = (e: any) => {
-    setContractType(e.target.value);
-  };
-
-  // handling work type
-  const handleWorkTypeChange = (e: any) => {
-    setWorkType(e.target.value);
-  };
-
-  const saveOrUpdateEmployee = (e: any) => {
-    e.preventDefault();
-
-    const employee = {
-      firstName,
-      middleName,
-      lastName,
-      emailId,
-      mobileNum,
-      address,
-      contractType,
-      startDate,
-      finishedDate,
-      workType,
-      workHours,
-    };
-
-    console.log(employee);
-
-    if (id) {
-      EmployeeService.updateEmployee(id, employee)
-        .then((res) => {
-          console.log(res.data);
-          navigate("/employees");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      EmployeeService.createEmployee(employee)
-        .then((res) => {
-          console.log(res.data);
-          navigate("/employees");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const onSubmit = (data: Employee) => {
+    console.log(data, "data");
+    try {
+      if (id) {
+        EmployeeService.updateEmployee(id, data)
+          .then((res) => {
+            console.log(res.data);
+            navigate("/employees");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        EmployeeService.createEmployee(data)
+          .then((res) => {
+            console.log(res.data);
+            navigate("/employees");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
-  // handle form errors
+  const [isPermanent, setIsPermanent] = useState(true);
+
+  const handleContractType = (e) => {
+    if (e.target.name !== "contractType") {
+      return;
+    }
+    if (e.target.value === "permanent") {
+      setIsPermanent(true);
+    } else {
+      setIsPermanent(false);
+    }
+  };
 
   return (
     <div>
@@ -100,195 +103,190 @@ const EmployeeForm = ({ employeeDetails }: Props) => {
               <h3>Back</h3>
             </Link>
             <div className="form-card_body">
-              <form onSubmit={saveOrUpdateEmployee}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 {/* Personal Information */}
                 <h2 className="form-card_header">Personal Information</h2>
                 <div className="form-card_group">
-                  <label className="form-card_label">First Name </label>
+                  <label className="form-card_label">First Name* </label>
+                  <div className="form-card_errors">
+                    {errors.firstName &&
+                      "First name is missing/invalid characters used"}
+                  </div>
                   <input
-                    type="text"
-                    placeholder="John"
-                    name="firstName"
-                    className="form-card_control"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
+                    {...register("firstName", {
+                      required: true,
+                      pattern: nameRegex,
+                    })}
                   />
                 </div>
-
                 <div className="form-card_group">
                   <label className="form-card_label">Middle Name </label>
                   <input
-                    type="text"
-                    placeholder=""
-                    name="middleName"
-                    className="form-card_control"
-                    value={middleName}
-                    onChange={(e) => setMiddleName(e.target.value)}
+                    {...register("middleName", {
+                      pattern: nameRegex,
+                    })}
                   />
                 </div>
-
                 <div className="form-card_group">
-                  <label className="form-card_label">Last Name </label>
+                  <label className="form-card_label">Last Name* </label>
+                  <div className="form-card_errors">
+                    {errors.lastName &&
+                      "Last Name is missing/invalid characters used"}
+                  </div>
                   <input
-                    type="text"
-                    placeholder="Doe"
-                    name="lastName"
-                    className="form-card_control"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
+                    {...register("lastName", {
+                      required: true,
+                      pattern: nameRegex,
+                    })}
                   />
                 </div>
-
                 {/* Contact details */}
                 <h2 className="form-card_header">Contact Details</h2>
                 <div className="form-card_group">
-                  <label className="form-card_label">Email Address </label>
+                  <label className="form-card_label">Email Address* </label>
+                  <div className="form-card_errors">
+                    {errors.emailId &&
+                      "Email address is missing/invalid characters used"}
+                  </div>
                   <input
-                    type="text"
-                    placeholder="john.doe@mail.com"
-                    name="emailId"
-                    className="form-card_control"
-                    value={emailId}
-                    onChange={(e) => setEmailId(e.target.value)}
-                    required
+                    {...register("emailId", {
+                      required: true,
+                      pattern: emailRegex,
+                    })}
                   />
                 </div>
-
                 <div className="form-card_group">
                   <label className="form-card_label">Mobile Number </label>
                   <p className="form-card_text">Must be an Australian Number</p>
+                  <div className="form-card_errors">
+                    {errors.mobileNum &&
+                      "Mobile number is missing/invalid characters used"}
+                  </div>
                   <input
                     type="tel"
-                    placeholder="+61 123 456 789 "
-                    name="mobileNum"
-                    className="form-card_control"
-                    value={mobileNum}
-                    onChange={(e) => setMobileNum(e.target.value)}
-                    required
+                    {...register("mobileNum", {
+                      required: true,
+                      pattern: numberRegex,
+                    })}
                   />
                 </div>
-
                 <div className="form-card_group">
                   <label className="form-card_label">
                     Residential Address{" "}
                   </label>
+                  <div className="form-card_errors">
+                    {errors.address &&
+                      "Residential address is missing/invalid characters used"}
+                  </div>
                   <input
-                    type="text"
-                    placeholder="123 Example St, Sydney NSW 2000"
-                    name="address"
-                    className="form-card_control"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
+                    {...register("address", {
+                      required: true,
+                      pattern: addressRegex,
+                    })}
                   />
                 </div>
-
                 {/* Employment status */}
                 <h2 className="form-card_header">Employment Status</h2>
                 <div className="form-card_group">
                   <label className="form-card_label">
                     What is contract type?
                   </label>
-
-                  <div className="form-card_radio">
-                    <input
-                      type="radio"
-                      id="permanent"
-                      name="contractType"
-                      value="permanent"
-                      checked={contractType === "permanent"}
-                      onChange={handleContractTypeChange}
-                      required
-                    />
-                    <label htmlFor="permanent">Permanent</label>
+                  <div className="form-card_errors">
+                    {errors.contractType && "Contract type must be selected."}
                   </div>
                   <div className="form-card_radio">
-                    <input
-                      type="radio"
-                      id="contract"
-                      name="contractType"
-                      value="contract"
-                      checked={contractType === "contract"}
-                      onChange={handleContractTypeChange}
-                    />
-                    <label htmlFor="contract">Contract</label>
+                    <div>
+                      <input
+                        type="radio"
+                        value="permanent"
+                        name="contractType"
+                        onClick={handleContractType}
+                        {...register("contractType", { required: true })}
+                      />
+                      Permanent
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        value="contract"
+                        name="contractType"
+                        onClick={handleContractType}
+                        {...register("contractType", { required: true })}
+                      />
+                      Contract
+                    </div>
                   </div>
                 </div>
-
                 <div className="form-card_group">
                   <label className="form-card_label">Start Date </label>
+                  <div className="form-card_errors">
+                    {errors.startDate && "Start date must be selected"}
+                  </div>
                   <input
                     type="date"
-                    name="startDate"
-                    className="form-card_control"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                    {...register("startDate", {
+                      required: true,
+                    })}
                   />
                 </div>
-
                 <div className="form-card_group">
                   <label className="form-card_label">Finished Date</label>
+                  <div className="form-card_errors">
+                    {errors.finishedDate && "Finished date must be selected"}
+                  </div>
                   <input
                     type="date"
                     name="finishedDate"
-                    className="form-card_control"
-                    value={finishedDate}
-                    onChange={(e) => setFinishedDate(e.target.value)}
-                    required
+                    hidden={isPermanent}
+                    {...register("finishedDate")}
                   />
                 </div>
-
                 <div className="form-card_group">
                   <label className="form-card_label">
                     Is this on a full time or part time basis?
                   </label>
-
-                  <div className="form-card_radio">
-                    <input
-                      type="radio"
-                      id="fullTime"
-                      name="workType"
-                      value="fullTime"
-                      checked={workType === "fullTime"}
-                      onChange={handleWorkTypeChange}
-                    />
-                    <label htmlFor="fullTime">Full-Time</label>
+                  <div className="form-card_errors">
+                    {errors.workType && "Employment type must be selected"}
                   </div>
-
                   <div className="form-card_radio">
-                    <input
-                      type="radio"
-                      id="partTime"
-                      name="workType"
-                      value="partTime"
-                      checked={workType === "partTime"}
-                      onChange={handleWorkTypeChange}
-                    />
-                    <label htmlFor="partTime">Part-Time</label>
+                    <div>
+                      <input
+                        type="radio"
+                        value="fullTime"
+                        name="workType"
+                        {...register("workType", { required: true })}
+                      />
+                      Full Time
+                    </div>
+
+                    <div className="form-card_radio">
+                      <input
+                        type="radio"
+                        value="partTime"
+                        name="workType"
+                        {...register("workType", { required: true })}
+                      />
+                      Part Time
+                    </div>
                   </div>
                 </div>
-
                 <div className="form-card_group">
                   <label className="form-card_label">Hours per week</label>
+                  <div className="form-card_errors">
+                    {errors.workHours && "Hours per week missing/invalid"}
+                  </div>
                   <input
-                    type="text"
-                    placeholder="35"
-                    name="workHours"
-                    className="form-card_control"
-                    value={workHours}
-                    onChange={(e) => setWorkHours(e.target.value)}
-                    required
+                    {...register("workHours", {
+                      required: true,
+                      min: 8,
+                      max: 45,
+                      pattern: numberRegex,
+                    })}
                   />
                 </div>
-
                 {/* submission buttons */}
-
                 <div className="form_btn">
-                  <button type="submit" className="form_btn_save">
-                    Save
-                  </button>
+                  <input type="submit" className="form_btn_save" />
                   <Link to="/employees">
                     <button className="form_btn_cancel">Cancel</button>
                   </Link>
